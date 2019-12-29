@@ -225,7 +225,8 @@ def add_place_location(message):
         )
 
         bot.send_message(chat_id=message.chat.id, text='Сохранено')
-    except Exception:
+    except Exception as e:
+        msg = bot.reply_to(message, str(e))
         msg = bot.reply_to(message, 'Упс... Что-то пошло не так. Пожалуйста, прикрепите локацию')
         bot.register_next_step_handler(msg, add_place_location)
         return
