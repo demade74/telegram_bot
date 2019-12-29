@@ -37,8 +37,8 @@ def get_place(user_id, place_id):
 @bot.message_handler(commands=['start'])
 def start_message(message):
     add_user(message)
-    text = """\n\nВот, что я умею:\nadd - добавить новое место\nlist - вывести 10 последних добавленных мест
-reset - удалить все добавленные места\nn - найти места в радиусе 500м от текущей локации"""
+    text = """\n\nВот, что я умею:\n/add - добавить новое место\n/list - вывести 10 последних добавленных мест
+/reset - удалить все добавленные места\n/n - найти места в радиусе 500м от текущей локации"""
 
     bot.send_message(chat_id=message.chat.id, text='Приветствую, ' + message.from_user.first_name)
     bot.send_message(chat_id=message.chat.id, text=text)
@@ -99,6 +99,12 @@ def reset_user_places(message):
 def current_location(message):
     msg = bot.send_message(chat_id=message.chat.id, text='Прикрепите ваше текущее местоположение')
     bot.register_next_step_handler(msg, get_nearest_places)
+
+
+@bot.message_handler(content_types=['text', 'location', 'photo'])
+def reply_to_input_outside_commands(message):
+    bot.reply_to(message, 'Пожалуйста, воспользуйтесь командами бота')
+    return
 
 
 @bot.message_handler(content_types=['location'])
