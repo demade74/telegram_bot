@@ -5,7 +5,7 @@ from operator import itemgetter
 from geopy import distance
 from config import TOKEN
 
-telebot.apihelper.proxy = {'https': 'socks5h://51.158.186.141:1080'}
+#telebot.apihelper.proxy = {'https': 'socks5h://51.158.186.141:1080'}
 bot = telebot.TeleBot(TOKEN)
 new_place = {}
 
