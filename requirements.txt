@@ -2,3 +2,4 @@ pymongo
 geopy
 pyTelegramBotAPI
 pysocks
+dnspython3
