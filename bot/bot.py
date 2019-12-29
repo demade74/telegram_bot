@@ -230,6 +230,7 @@ def add_place_location(message):
         bot.register_next_step_handler(msg, add_place_location)
         return
 
+
 if __name__ == '__main__':
     bot.enable_save_next_step_handlers(delay=2)
     #bot.load_next_step_handlers()
