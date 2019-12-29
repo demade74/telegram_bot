@@ -110,7 +110,6 @@ def get_nearest_places(message):
     cur_location = (float(message.location.latitude), float(message.location.longitude))
     found_places = []
     p = ''
-    counter = 0
     result = user_data(message.from_user.id)
 
     if 'places' not in result.keys():
@@ -124,7 +123,7 @@ def get_nearest_places(message):
         d = int(distance.distance(cur_location, destination).m)
 
         if d <= 500:
-            counter += 1
+            number += 1
             p = p + (str(number) + '. ' + place['address'] + '\n')
             found_places.append(number)
 
@@ -226,7 +225,6 @@ def add_place_location(message):
 
         bot.send_message(chat_id=message.chat.id, text='Сохранено')
     except Exception as e:
-        msg = bot.reply_to(message, str(e))
         msg = bot.reply_to(message, 'Упс... Что-то пошло не так. Пожалуйста, прикрепите локацию')
         bot.register_next_step_handler(msg, add_place_location)
         return
@@ -234,7 +232,4 @@ def add_place_location(message):
 
 if __name__ == '__main__':
     bot.enable_save_next_step_handlers(delay=2)
-    #bot.load_next_step_handlers()
-    #bot.polling(none_stop=True, timeout=300)
-    #bot.infinity_polling(True)
     bot.polling(none_stop=True, interval=0, timeout=20)
